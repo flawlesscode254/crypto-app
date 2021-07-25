@@ -31,38 +31,38 @@ const MarketScreen = () => {
                 backgroundColor: "#FFF"
             }}>
                 <Currency 
-                    image={"https://cryptologos.cc/logos/usd-coin-usdc-logo.png"}
-                    name="USD coin"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="69.420"
                     gain="2.7"
                 />
                 <Currency 
-                    image={"https://www.ebuyer.com/blog/wp-content/uploads/2013/11/bitcoin-logo-1000_0.jpg"}
-                    name="Bitcoin"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="35,000"
                     gain="-2.7"
                 />
                 <Currency 
-                    image={"https://logodownload.org/wp-content/uploads/2021/01/bitcoin-cash-logo-5.png"}
-                    name="Bitcoin cash"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="10,000"
                     gain="2.7"
                 />
                 <Currency 
-                    image={"https://img.favpng.com/25/3/8/litecoin-cryptocurrency-bitcoin-logo-png-favpng-4kyBSfxyMqZ1TrWcGwSdjwWtu.jpg"}
-                    name="Litecoin"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="69.420"
                     gain="-2.7"
                 />
                 <Currency 
-                    image={"https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"}
-                    name="Etherium"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="69.420"
                     gain="2.7"
                 />
                 <Currency 
-                    image={"https://preview.redd.it/72ssbszi6fm61.jpg?width=1200&format=pjpg&auto=webp&s=aad786ba8098ebae9bac13d06a00021fa40c9be2"}
-                    name="Doge coin"
+                    image={require('../assets/profile.png')}
+                    name="Duncan Kipkemoi"
                     value="69.420"
                     gain="-2.7"
                 />

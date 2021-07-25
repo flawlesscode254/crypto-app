@@ -23,7 +23,7 @@ const PortfolioCurrency = ({ image, name, value, gain }) => {
                         borderRadius: 999,
                         marginRight: 20
                     }}
-                    source={{ uri: image }}
+                    source={image}
                 />
                 <View>
                     <Text style={{
