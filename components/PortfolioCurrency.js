@@ -1,53 +1,63 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/core'
 
 const PortfolioCurrency = ({ image, name, label, value }) => {
+
+    const navigation = useNavigation()
+
+    const goTo = () => {
+        navigation.navigate("PortfolioDetails")
+    }
+
     return (
-        <View style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexDirection: "row",
-            marginHorizontal: 20,
-            marginBottom: 10,
-            marginTop: 10
-        }}>
+        <TouchableOpacity onPress={goTo}>
             <View style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
                 flexDirection: "row",
-                alignItems: "center"
+                marginHorizontal: 20,
+                marginBottom: 10,
+                marginTop: 10
             }}>
-                <Image 
-                    style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 999,
-                        marginRight: 20
-                    }}
-                    source={{ uri: image }}
-                />
-                <View>
+                <View style={{
+                    flexDirection: "row",
+                    alignItems: "center"
+                }}>
+                    <Image 
+                        style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 999,
+                            marginRight: 20
+                        }}
+                        source={{ uri: image }}
+                    />
+                    <View>
+                        <Text style={{
+                            fontWeight: "bold"
+                        }}>{name}</Text>
+                        <Text style={{
+                            color: "gray"
+                        }}>{label}</Text>
+                    </View>
+                </View>
+                <View style={{
+                    justifyContent: "flex-end",
+                    alignItems: "flex-end"
+                }}>
                     <Text style={{
+                        fontSize: 20,
                         fontWeight: "bold"
-                    }}>{name}</Text>
+                    }}>{`$ ${value}`}</Text>
                     <Text style={{
-                        color: "gray"
-                    }}>{label}</Text>
+                        color: "gray",
+                        fontWeight: "bold"
+                    }}>{`$ ${value}`}</Text>
                 </View>
             </View>
-            <View style={{
-                justifyContent: "flex-end",
-                alignItems: "flex-end"
-            }}>
-                <Text style={{
-                    fontSize: 20,
-                    fontWeight: "bold"
-                }}>{`$ ${value}`}</Text>
-                <Text style={{
-                    color: "gray",
-                    fontWeight: "bold"
-                }}>{`$ ${value}`}</Text>
-            </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
