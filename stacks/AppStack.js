@@ -31,14 +31,14 @@ const AppStack = () => {
                 name="CoinDetails" 
                 component={CoinDetails} 
                 options={{
-                    title: "Stats"
+                    title: "Crypto Exchange"
                 }}
             />
             <Stack.Screen 
                 name="PortfolioDetails" 
                 component={PortfolioDetails} 
                 options={{
-                    title: "Stats"
+                    title: "Your Crypto Trades"
                 }}
             />
         </Stack.Navigator>

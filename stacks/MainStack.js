@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
 import {Ionicons} from '@expo/vector-icons'
 
 import HomeScreen from '../screens/HomeScreen'
@@ -9,7 +8,6 @@ import MarketScreen from '../screens/MarketScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import PortfolioScreen from '../screens/PortfolioScreen'
 import RankingScreen from '../screens/RankingScreen'
-import CoinDetails from '../pages/CoinDetails'
 
 const MainStack = () => {
 

@@ -146,54 +146,43 @@ const CoinDetails = () => {
                 
             </View>
 
-
             <View style={{
                 marginHorizontal: 10,
-                marginVertical: 10,
-                borderBottomWidth: 1,
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                paddingBottom: 10
+                marginTop: 20,
+                borderTopWidth: 1,
+                padding: 10
             }}>
-                <Text>Position</Text>
-                <TouchableOpacity style={{
-                    paddingHorizontal: 10,
-                    paddingVertical: 3,
-                    borderRadius: 5,
-                    backgroundColor: "red",
-                    justifyContent: "center",
+                <Text style={{
+                    fontSize: 10,
+                    color: "black"
+                }}>Jul 27, 8:32:15 PM</Text>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: "space-between",
                     alignItems: "center"
                 }}>
                     <Text style={{
-                        color: "#FFF",
-                        fontWeight: "bold",
-                        letterSpacing: 2
-                    }}>Close order</Text>
-                </TouchableOpacity>
-            </View>
-
-            <View style={{
-                marginHorizontal: 10,
-                flexDirection: 'row',
-                justifyContent: "space-evenly",
-                alignItems: "center"
-            }}>
-                <Text style={{
-                    color: "green",
-                    fontWeight: "bold"
-                }}>Buy</Text>
-                <View>
-                    <Text>Buy at</Text>
-                    <Text>123.00</Text>
-                </View>
-                <View>
-                    <Text>Take Profit</Text>
-                    <Text>128.00</Text>
-                </View>
-                <View>
-                    <Text>Take Loss</Text>
-                    <Text>120.00</Text>
+                        color: "green",
+                        fontWeight: "bold"
+                    }}>Buy</Text>
+                    <View>
+                        <Text style={{
+                            color: "red"
+                        }}>Initial</Text>
+                        <Text>123.00</Text>
+                    </View>
+                    <View>
+                        <Text style={{
+                            color: "red"
+                        }}>Current</Text>
+                        <Text>128.00</Text>
+                    </View>
+                    <View>
+                        <Text style={{
+                            color: "red"
+                        }}>Gain</Text>
+                        <Text>120.00</Text>
+                    </View>
                 </View>
             </View>
         </View>
