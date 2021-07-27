@@ -1,7 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { auth } from "../firebase"
+import { useNavigation } from '@react-navigation/core'
 
 const ProfileScreen = () => {
+    const navigation = useNavigation()
+
+    const signOut = () => {
+        auth.signOut().then(() => navigation.navigate("Auth"))
+    }
+
     return (
         <View style={styles.container}>
             <Image 
@@ -42,7 +50,7 @@ const ProfileScreen = () => {
                 left: 0,
                 right: 0
             }}>
-                <TouchableOpacity style={{
+                <TouchableOpacity onPress={signOut} style={{
                     paddingTop: 10,
                     borderRadius: 7,
                     backgroundColor: "red",

@@ -14,18 +14,18 @@ const AppStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen 
-                name="Main" 
-                component={MainStack} 
-                options={{
-                    headerShown: false
-                }}
-            />
-            <Stack.Screen 
                 name="Auth" 
                 component={AuthStack}
                 options={{
                     headerShown: false
                 }} 
+            />
+            <Stack.Screen 
+                name="Main" 
+                component={MainStack} 
+                options={{
+                    headerShown: false
+                }}
             />
             <Stack.Screen 
                 name="CoinDetails" 
