@@ -20,6 +20,7 @@ const CoinDetails = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [balance, setBalance] = useState()
+  const [reference, setReference] = useState()
 
   const navigation = useNavigation();
 
@@ -27,14 +28,15 @@ const CoinDetails = () => {
     db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
         snapshot.docs.forEach(doc => {
             setBalance((doc.data().amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            setReference(doc.id)
         })
     })
 }, [])
 
   const makeUpdate = () => {
-    auth?.currentUser?.updateProfile({
-      photoURL: Number(auth?.currentUser?.photoURL) - Number(amount),
-    });
+    db.collection("users").doc(reference).update({
+      amount: (Number(auth?.currentUser?.photoURL) - Number(amount))
+    })
   };
 
   const makeChange = () => {

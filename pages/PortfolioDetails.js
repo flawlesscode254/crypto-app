@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import db, {auth} from '../firebase'
 
 import PorfolioState from "../components/PorfolioState";
@@ -190,18 +190,20 @@ const CoinDetails = () => {
           </View>
         </View>
       </View>
-      <ScrollView>
-            {data.map(({ id, time, nature, bitcoin_bought, money_spent, buying_price }) => (
-              <PorfolioState 
-                key={id}
-                time={time}
-                nature={nature}
-                bitcoin_bought={bitcoin_bought}
-                money_spent={money_spent}
-                buying_price={buying_price}
-              />
-            ))}
-      </ScrollView>
+        <FlatList 
+          inverted={true}
+          data={data}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <PorfolioState
+              time={item.time}
+              nature={item.nature}
+              bitcoin_bought={item.bitcoin_bought}
+              money_spent={item.money_spent}
+              buying_price={item.buying_price}
+            />
+          )}
+        />
     </View>
   );
 };

@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import Currency from '../components/PortfolioCurrency'
+import db, {auth} from '../firebase'
 
 const PortfolioScreen = () => {
+    const [money, setMoney] = useState()
+
+    useEffect(() => {
+        db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                setMoney((doc.data().amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            })
+        })
+    }, [])
     return (
         <View style={{
             flex: 1,
@@ -26,7 +36,7 @@ const PortfolioScreen = () => {
                 <Text style={{
                     fontSize: 35,
                     fontWeight: "bold"
-                }}>$69.420</Text>
+                }}>{`$ ${money}`}</Text>
             </View> 
 
             <ScrollView style={{
