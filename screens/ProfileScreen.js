@@ -1,10 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { auth } from "../firebase"
+import db, { auth } from "../firebase"
 import { useNavigation } from '@react-navigation/core'
 
 const ProfileScreen = () => {
+    const [money, setMoney] = useState()
     const navigation = useNavigation()
+
+    useEffect(() => {
+        db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                setMoney((doc.data().amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            })
+        })
+    }, [])
 
     const signOut = () => {
         auth.signOut().then(() => navigation.navigate("Auth"))
@@ -32,7 +41,7 @@ const ProfileScreen = () => {
             <Text style={{
                 color: "red",
                 fontWeight: "bold"
-            }}>{`$ ${(auth?.currentUser?.photoURL).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
+            }}>{`$ ${money}`}</Text>
             <View style={{
                 flexDirection: "row",
                 marginTop: 10

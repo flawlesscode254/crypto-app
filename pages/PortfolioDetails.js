@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import { LineChart } from "react-native-chart-kit";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import db, {auth} from '../firebase'
+
+import PorfolioState from "../components/PorfolioState";
 
 const CoinDetails = () => {
   const [prices, setPrices] = useState();
@@ -10,6 +12,20 @@ const CoinDetails = () => {
   const [checkers, setCheckers] = useState([]);
   const [next, setNext] = useState();
   const [month, setMonth] = useState();
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    db.collection("buy").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
+      setData(snapshot.docs.map(doc => ({
+        id: doc.id,
+        time: doc.data().time,
+        nature: doc.data().nature,
+        buying_price: doc.data().buying_price,
+        bitcoin_bought: doc.data().bitcoin_bought,
+        money_spent: doc.data().money_spent
+      })))
+    })
+  }, [])
 
   useEffect(() => {
     (async () => {
@@ -151,7 +167,7 @@ const CoinDetails = () => {
                 color: change > 0 ? "green" : "red",
               }}
             >
-              {change > 0 ? `+${change}%` : `-${change}%`}
+              {change > 0 ? `+${change}%` : `${change}%`}
             </Text>
           </View>
           <View>
@@ -169,77 +185,23 @@ const CoinDetails = () => {
                 color: month > 0 ? "green" : "red",
               }}
             >
-              {month > 0 ? `+${month}%` : `-${month}%`}
+              {month > 0 ? `+${month}%` : `${month}%`}
             </Text>
           </View>
         </View>
       </View>
-
-      <View
-        style={{
-          marginHorizontal: 10,
-          marginTop: 20,
-          borderTopWidth: 1,
-          padding: 10,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 10,
-            color: "black",
-          }}
-        >
-          Jul 27, 8:32:15 PM
-        </Text>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              color: "green",
-              fontWeight: "bold",
-            }}
-          >
-            Buy
-          </Text>
-          <View>
-            <Text
-              style={{
-                color: "red",
-              }}
-            >
-              Initial
-            </Text>
-            <Text style={{
-                color: "black"
-            }}>123.00</Text>
-          </View>
-          <View>
-            <Text
-              style={{
-                color: "red",
-              }}
-            >
-              Current
-            </Text>
-            <Text>128.00</Text>
-          </View>
-          <View>
-            <Text
-              style={{
-                color: "red",
-              }}
-            >
-              Gain
-            </Text>
-            <Text>120.00</Text>
-          </View>
-        </View>
-      </View>
+      <ScrollView>
+            {data.map(({ id, time, nature, bitcoin_bought, money_spent, buying_price }) => (
+              <PorfolioState 
+                key={id}
+                time={time}
+                nature={nature}
+                bitcoin_bought={bitcoin_bought}
+                money_spent={money_spent}
+                buying_price={buying_price}
+              />
+            ))}
+      </ScrollView>
     </View>
   );
 };

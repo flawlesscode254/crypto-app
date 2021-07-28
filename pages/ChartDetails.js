@@ -6,7 +6,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { useNavigation } from "@react-navigation/core";
@@ -257,7 +257,7 @@ const CoinDetails = () => {
                   color: change > 0 ? "green" : "red",
                 }}
               >
-                {change > 0 ? `+${change}%` : `-${change}%`}
+                {change > 0 ? `+${change}%` : `${change}%`}
               </Text>
             </View>
             <View>
@@ -275,7 +275,7 @@ const CoinDetails = () => {
                   color: month > 0 ? "green" : "red",
                 }}
               >
-                {month > 0 ? `+${month}%` : `-${month}%`}
+                {month > 0 ? `+${month}%` : `${month}%`}
               </Text>
             </View>
           </View>
@@ -283,59 +283,64 @@ const CoinDetails = () => {
       ) : (
         <ActivityIndicator size="large" color="red" />
       )}
-      <View
-        style={{
-          position: "absolute",
-          bottom: 30,
-          left: 0,
-          right: 0,
-          marginHorizontal: 40,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <TouchableOpacity
+
+      {current ? (
+        <View
           style={{
-            borderRadius: 25,
-            backgroundColor: "#FF5349",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingVertical: 10,
-            paddingHorizontal: 30,
+            position: "absolute",
+            bottom: 30,
+            left: 0,
+            right: 0,
+            marginHorizontal: 40,
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <Text
+          <TouchableOpacity
             style={{
-              color: "#FFF",
-              fontWeight: "bold",
-              letterSpacing: 2,
+              borderRadius: 25,
+              backgroundColor: "#FF5349",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingVertical: 10,
+              paddingHorizontal: 30,
             }}
           >
-            Sell
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={goTo}
-          style={{
-            borderRadius: 25,
-            backgroundColor: "green",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingVertical: 10,
-            paddingHorizontal: 30,
-          }}
-        >
-          <Text
+            <Text
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                letterSpacing: 2,
+              }}
+            >
+              Sell
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={goTo}
             style={{
-              color: "#FFF",
-              fontWeight: "bold",
-              letterSpacing: 2,
+              borderRadius: 25,
+              backgroundColor: "green",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingVertical: 10,
+              paddingHorizontal: 30,
             }}
           >
-            Buy
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Text
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                letterSpacing: 2,
+              }}
+            >
+              Buy
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <ActivityIndicator size="large" color="red" />
+      )}
     </View>
   );
 };

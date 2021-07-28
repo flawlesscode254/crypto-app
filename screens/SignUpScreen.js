@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, StatusBar, ActivityIndicator, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import { auth } from '../firebase'
+import db, { auth } from '../firebase'
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -10,13 +10,20 @@ const SignUpScreen = ({ navigation }) => {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false);
 
+    const addUser = () => {
+        db.collection("users").add({
+            name: name,
+            email: email,
+            amount: 100000
+        })
+    }
+
     const handleSignUp = async () => {
         await setLoading(!loading);
         await auth.createUserWithEmailAndPassword(email, password)
         .then( async (authUser) => {
           await authUser.user.updateProfile({
-            displayName: name,
-            photoURL: 100000
+            displayName: name
           });
           await addUser()
           await setName('')
