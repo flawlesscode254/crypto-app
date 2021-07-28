@@ -15,14 +15,6 @@ const CoinDetails = () => {
         })()
     }, [])
 
-    useEffect(() => {
-        (async () => {
-            const response = await fetch("https://api.coindesk.com/v1/bpi/historical/close.json")
-            const json = await response.json()
-            await console.log(json);
-        })()
-    }, [])
-
     return (
         <View style={{
             flex: 1,

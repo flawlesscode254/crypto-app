@@ -7,7 +7,7 @@ const PortfolioCurrency = ({ image, name, label, value, rate }) => {
     const navigation = useNavigation()
 
     const goTo = () => {
-        navigation.navigate("CoinDetails")
+        navigation.navigate("ChartDetails")
     }
 
     return (

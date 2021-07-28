@@ -6,6 +6,8 @@ import AuthStack from './AuthStack'
 import MainStack from './MainStack'
 import CoinDetails from '../pages/CoinDetails'
 import PortfolioDetails from '../pages/PortfolioDetails'
+import ChartDetails from '../pages/ChartDetails'
+import BuyBitcoin from '../pages/BuyBitcoin'
 
 const AppStack = () => {
 
@@ -39,6 +41,20 @@ const AppStack = () => {
                 component={PortfolioDetails} 
                 options={{
                     title: "Your Crypto Trades"
+                }}
+            />
+            <Stack.Screen 
+                name="ChartDetails" 
+                component={ChartDetails} 
+                options={{
+                    title: "Make a Trade"
+                }}
+            />
+            <Stack.Screen 
+                name="BuyBitcoin" 
+                component={BuyBitcoin} 
+                options={{
+                    title: "Buy Bitcoin"
                 }}
             />
         </Stack.Navigator>

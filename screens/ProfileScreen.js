@@ -24,11 +24,15 @@ const ProfileScreen = () => {
                 fontSize: 20,
                 color: "#04198f",
                 fontWeight: "bold"
-            }}>Duncan Kipkemoi</Text>
+            }}>{auth?.currentUser?.displayName}</Text>
             <Text style={{
                 marginTop: 10,
                 color: "#eb7a34"
-            }}>duncanii414@gmail.com</Text>
+            }}>{auth?.currentUser?.email}</Text>
+            <Text style={{
+                color: "red",
+                fontWeight: "bold"
+            }}>{`$ ${(auth?.currentUser?.photoURL).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
             <View style={{
                 flexDirection: "row",
                 marginTop: 10

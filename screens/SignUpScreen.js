@@ -15,9 +15,10 @@ const SignUpScreen = ({ navigation }) => {
         await auth.createUserWithEmailAndPassword(email, password)
         .then( async (authUser) => {
           await authUser.user.updateProfile({
-            displayName: name
+            displayName: name,
+            photoURL: 100000
           });
-          
+          await addUser()
           await setName('')
           await setEmail('')
           await setPassword('')
