@@ -4,7 +4,7 @@
     "slug": "BT-Trader",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/log.png",
+    "icon": "./assets/market.png",
     "splash": {
       "image": "./assets/log.png",
       "resizeMode": "contain",
@@ -21,9 +21,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/log.png",
+        "foregroundImage": "./assets/market.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.duncanii"
     },
     "web": {
       "favicon": "./assets/log.png"
