@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AppStack from "./stacks/AppStack";
@@ -8,7 +7,7 @@ import AppStack from "./stacks/AppStack";
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar barStyle="light-content" />
       <AppStack />
     </NavigationContainer>
   );
