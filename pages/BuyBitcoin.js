@@ -18,27 +18,36 @@ const CoinDetails = () => {
   const [final, setFinal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [balance, setBalance] = useState()
-  const [reference, setReference] = useState()
-  const [price, setPrice] = useState()
-  const [vary, setVary] = useState()
+  const [balance, setBalance] = useState();
+  const [reference, setReference] = useState();
+  const [price, setPrice] = useState();
+  const [vary, setVary] = useState();
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
-        snapshot.docs.forEach(doc => {
-            setBalance((doc.data().amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-            setVary(doc.data().amount)
-            setReference(doc.id)
-        })
-    })
-}, [])
+    db.collection("users")
+      .where("email", "==", auth?.currentUser?.email)
+      .onSnapshot((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          setBalance(
+            doc
+              .data()
+              .amount.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          );
+          setVary(doc.data().amount);
+          setReference(doc.id);
+        });
+      });
+  }, []);
 
   const makeUpdate = () => {
-    db.collection("users").doc(reference).update({
-      amount: (Number(vary) - Number(amount))
-    })
+    db.collection("users")
+      .doc(reference)
+      .update({
+        amount: Number(vary) - Number(amount),
+      });
   };
 
   const makeChange = () => {
@@ -91,7 +100,7 @@ const CoinDetails = () => {
         await setPrice(json.bpi.USD.rate);
         await setVal(json.bpi.USD.rate_float);
       }, 1000);
-    })()
+    })();
   }, []);
 
   return (
@@ -150,8 +159,10 @@ const CoinDetails = () => {
           >
             1BTC ={" "}
           </Text>
-          {`$${(Number(val).toFixed(2)).toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+          {`$${Number(val)
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
         </Text>
 
         <View

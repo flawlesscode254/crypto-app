@@ -29,15 +29,17 @@ const PortfolioScreen = () => {
   }, [bought]);
 
   useEffect(() => {
-    db.collection("buy").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
-      setBought(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          bitcoin_bought: doc.data().bitcoin_bought,
-          money_spent: doc.data().money_spent,
-        }))
-      );
-    });
+    db.collection("buy")
+      .where("email", "==", auth?.currentUser?.email)
+      .onSnapshot((snapshot) => {
+        setBought(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            bitcoin_bought: doc.data().bitcoin_bought,
+            money_spent: doc.data().money_spent,
+          }))
+        );
+      });
   }, []);
 
   useEffect(() => {

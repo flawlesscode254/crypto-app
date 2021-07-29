@@ -293,7 +293,7 @@ const CoinDetails = () => {
             right: 0,
             marginHorizontal: 40,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity

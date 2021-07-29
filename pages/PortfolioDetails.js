@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import db, { auth } from "../firebase";
 
 import PorfolioState from "../components/PorfolioState";
 
 const CoinDetails = () => {
-  const [prices, setPrices] = useState();
-  const [dates, setDates] = useState();
   const [current, setCurrent] = useState();
   const [change, setChange] = useState();
   const [checkers, setCheckers] = useState([]);
@@ -38,9 +43,7 @@ const CoinDetails = () => {
         "https://api.coindesk.com/v1/bpi/historical/close.json"
       );
       const json = await response.json();
-      await setPrices(Object.values(json.bpi));
       await setCheckers(Object.values(json.bpi));
-      await setDates(Object.keys(json.bpi));
     })();
   }, []);
 
@@ -75,14 +78,14 @@ const CoinDetails = () => {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#FFF"
+        backgroundColor: "#FFF",
       }}
     >
       <View
         style={{
           flexDirection: "row",
           marginVertical: 10,
-          marginHorizontal: 10
+          marginHorizontal: 10,
         }}
       >
         <Image
@@ -201,36 +204,42 @@ const CoinDetails = () => {
         <ActivityIndicator size="large" color="green" />
       )}
       {data.length > 0 ? (
-      <View>
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <PorfolioState
-              id={item.id}
-              time={item.time}
-              nature={item.nature}
-              bitcoin_bought={item.bitcoin_bought}
-              money_spent={item.money_spent}
-              buying_price={item.buying_price}
-            />
-          )}
-        />
-      </View>
+        <View>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <PorfolioState
+                id={item.id}
+                time={item.time}
+                nature={item.nature}
+                bitcoin_bought={item.bitcoin_bought}
+                money_spent={item.money_spent}
+                buying_price={item.buying_price}
+              />
+            )}
+          />
+        </View>
       ) : (
-        <View style={{
-          justifyContent: "center",
-          alignItems: "center",
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 200
-        }}>
-            <Text style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                letterSpacing: 2
-            }}>Nothing to show here yet!!</Text>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 200,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              letterSpacing: 2,
+            }}
+          >
+            Nothing to show here yet!!
+          </Text>
         </View>
       )}
     </View>
