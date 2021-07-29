@@ -200,20 +200,39 @@ const CoinDetails = () => {
       ) : (
         <ActivityIndicator size="large" color="green" />
       )}
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <PorfolioState
-            id={item.id}
-            time={item.time}
-            nature={item.nature}
-            bitcoin_bought={item.bitcoin_bought}
-            money_spent={item.money_spent}
-            buying_price={item.buying_price}
-          />
-        )}
-      />
+      {data.length > 0 ? (
+      <View>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <PorfolioState
+              id={item.id}
+              time={item.time}
+              nature={item.nature}
+              bitcoin_bought={item.bitcoin_bought}
+              money_spent={item.money_spent}
+              buying_price={item.buying_price}
+            />
+          )}
+        />
+      </View>
+      ) : (
+        <View style={{
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 200
+        }}>
+            <Text style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                letterSpacing: 2
+            }}>Nothing to show here yet!!</Text>
+        </View>
+      )}
     </View>
   );
 };

@@ -58,10 +58,6 @@ const AppStack = () => {
                     title: "Buy Bitcoin"
                 }}
             />
-            <Stack.Screen 
-                name="Completed Sales" 
-                component={RankingScreen}
-            />
         </Stack.Navigator>
     )
 }

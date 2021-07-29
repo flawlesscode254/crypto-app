@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import db, {auth} from '../firebase'
 
 import Sales from '../components/Sales'
@@ -25,8 +25,15 @@ const MarketScreen = () => {
     return (
         <View style={{
             flex: 1,
-            marginTop: 30
+            marginTop: 30,
+            justifyContent: data.length > 0 ? "flex-start" : "center",
+            alignItems: data.length > 0 ? "flex-start" : "center"
         }}>
+            <StatusBar barStyle="dark-content" />
+            {data.length > 0 ? (
+            <View style={{
+                marginTop: 20
+            }}>
                 <FlatList 
                     data={data}
                     keyExtractor={item => item.id}
@@ -41,7 +48,16 @@ const MarketScreen = () => {
                         />
                     )}
                 />
-
+            </View>
+            ) : (
+                <View>
+                    <Text style={{
+                        fontSize: 20,
+                        fontWeight: "bold",
+                        letterSpacing: 2
+                    }}>Nothing to show here yet!!</Text>
+                </View>
+            )}
         </View>
         
     )
