@@ -129,8 +129,8 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
                     color: "blue"
                 }}>Amount change</Text>
                 <Text style={{
-                    color: (Number(next) - Number(buying_price.replace(/\$|,/g, ""))).toFixed(2) > 0 ? "green" : "red"
-                }}>{`$ ${(Number(next) - Number(buying_price.replace(/\$|,/g, ""))).toFixed(2)}`}</Text>
+                    color: (((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)) - Number(money_spent)).toFixed(2) > 0 ? "green" : "red"
+                }}>{`$ ${(((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)) - Number(money_spent)).toFixed(2)}`}</Text>
             </View>
             <View>
                 <Text style={{
@@ -138,7 +138,7 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
                 }}>Total income</Text>
                 <Text style={{
                   color: "black"
-                }}>{`$ ${((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) + Number(money_spent)).toFixed(2)}`}</Text>
+                }}>{`$ ${((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)).toFixed(2)}`}</Text>
             </View>
             <View>
                 <Text style={{

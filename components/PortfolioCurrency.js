@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
-const PortfolioCurrency = ({ image, name, label, value }) => {
+const PortfolioCurrency = ({ image, name, label, value, amount, spent }) => {
 
     const navigation = useNavigation()
 
@@ -30,7 +30,7 @@ const PortfolioCurrency = ({ image, name, label, value }) => {
                             width: 50,
                             height: 50,
                             borderRadius: 999,
-                            marginRight: 20
+                            marginRight: 10
                         }}
                         source={{ uri: image }}
                     />
@@ -54,7 +54,11 @@ const PortfolioCurrency = ({ image, name, label, value }) => {
                     <Text style={{
                         color: "gray",
                         fontWeight: "bold"
-                    }}>{`$ ${value}`}</Text>
+                    }}>{`owned: ${amount} BTC`}</Text>
+                    <Text style={{
+                        color: "blue",
+                        fontWeight: "bold"
+                    }}>{`spent: $${spent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
                 </View>
             </View>
         </TouchableOpacity>
