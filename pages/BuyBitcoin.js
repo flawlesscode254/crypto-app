@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/core";
 
 const CoinDetails = () => {
   const [val, setVal] = useState();
-  const [price, setPrice] = useState();
   const [amount, setAmount] = useState();
   const [final, setFinal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -80,14 +79,15 @@ const CoinDetails = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        "https://api.coindesk.com/v1/bpi/currentprice.json"
-      );
-      const json = await response.json();
-      await setPrice(json.bpi.USD.rate);
-      await setVal(json.bpi.USD.rate_float);
-    })();
+    (() => {
+      setInterval(async () => {
+        const response = await fetch(
+          "https://api.coindesk.com/v1/bpi/currentprice.json"
+        );
+        const json = await response.json();
+        await setVal(json.bpi.USD.rate_float);
+      }, 1000);
+    })()
   }, []);
 
   return (
@@ -146,7 +146,8 @@ const CoinDetails = () => {
           >
             1BTC ={" "}
           </Text>
-          {`$${price}`}{" "}
+          {`$${(Number(val).toFixed(2)).toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
         </Text>
 
         <View

@@ -21,11 +21,11 @@ const PortfolioScreen = () => {
     var sum = bought.reduce(function (first, currentValue) {
       return Number(first) + Number(currentValue.bitcoin_bought);
     }, 0);
-    setTotal(sum);
+    setTotal(sum.toFixed(8));
     var calc = bought.reduce(function (first, currentValue) {
       return Number(first) + Number(currentValue.money_spent);
     }, 0);
-    setDeal(calc);
+    setDeal(calc.toFixed(2));
   }, [bought]);
 
   useEffect(() => {

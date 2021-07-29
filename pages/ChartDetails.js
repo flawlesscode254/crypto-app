@@ -292,30 +292,10 @@ const CoinDetails = () => {
             left: 0,
             right: 0,
             marginHorizontal: 40,
-            flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
-          <TouchableOpacity
-            style={{
-              borderRadius: 25,
-              backgroundColor: "#FF5349",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingVertical: 10,
-              paddingHorizontal: 30,
-            }}
-          >
-            <Text
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                letterSpacing: 2,
-              }}
-            >
-              Sell
-            </Text>
-          </TouchableOpacity>
           <TouchableOpacity
             onPress={goTo}
             style={{
@@ -324,7 +304,7 @@ const CoinDetails = () => {
               justifyContent: "center",
               alignItems: "center",
               paddingVertical: 10,
-              paddingHorizontal: 30,
+              paddingHorizontal: 60,
             }}
           >
             <Text

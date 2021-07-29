@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 import db, {auth} from '../firebase'
+import firebase from 'firebase'
 
-const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent }) => {
+const PorfolioState = ({ id, time, nature, buying_price, bitcoin_bought, money_spent }) => {
     const [current, setCurrent] = useState()
+    const [reference, setReference] = useState()
     const [next, setNext] = useState();
+    const [loading, setLoading] = useState(false)
 
     const a = Number(next)
     const b = Number(buying_price.replace(/\$|,/g, ""))
@@ -13,6 +16,36 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
     const change = (((((((a - b) / b) * 100) + 100) / 100) * c) - c).toFixed(2)
     const income = ((((((a - b) / b) * 100) + 100) / 100) * c).toFixed(2)
     const percent = (((a - b) / b) * 100).toFixed(2)
+
+    const addSell = () => {
+      db.collection("sell").add({
+        name: auth?.currentUser?.displayName,
+        email: auth?.currentUser?.email,
+        original: Number(money_spent),
+        profit: Number(change),
+        final: Number(income),
+        bitcoin: bitcoin_bought,
+        time: firebase.firestore.FieldValue.serverTimestamp()
+      })
+    }
+
+    const makeDelete = () => {
+      db.collection("buy").doc(id).delete()
+    }
+
+    const makeUpdate = () => {
+      db.collection("users").doc(reference).update({
+        amount: (Number(current) + Number(income))
+      })
+    }
+
+    const makeSale = async () => {
+      await setLoading(!loading)
+      await addSell()
+      await makeUpdate()
+      await makeDelete()
+      await setLoading(loading)
+    }
 
     useEffect(() => {
         (() => {
@@ -29,6 +62,7 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
     useEffect(() => {
         db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
             snapshot.docs.forEach(doc => {
+                setReference(doc.id)
                 setCurrent(doc.data().amount)
             })
         })
@@ -60,6 +94,7 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
         {new Date(time?.toDate()).toDateString() + ' ' + ' '} <Text style={{color: "black"}}>{new Date(time?.toDate()).toLocaleTimeString()}</Text>
       </Text>
         <TouchableOpacity 
+        onPress={makeSale}
         style={{
             backgroundColor: "red",
             borderRadius: 15,
@@ -69,10 +104,15 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
             justifyContent: "center"
         }}
         >
+          {loading ? (
+            <ActivityIndicator size="large" color="#FFF" />
+          ) : (
             <Text style={{
                 color: "#FFF",
-                fontWeight: "bold"
-            }}>Close</Text>
+                fontWeight: "bold",
+                letterSpacing: 2
+            }}>Sell</Text>
+          )}
         </TouchableOpacity>
         </View>
       <Text
@@ -122,7 +162,7 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
           >
             Money Spent
           </Text>
-          <Text>{`$ ${money_spent}`}</Text>
+          <Text>{`$ ${Number(money_spent).toFixed(2)}`}</Text>
         </View>
       </View>
             {next ? (

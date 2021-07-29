@@ -205,6 +205,7 @@ const CoinDetails = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <PorfolioState
+            id={item.id}
             time={item.time}
             nature={item.nature}
             bitcoin_bought={item.bitcoin_bought}
