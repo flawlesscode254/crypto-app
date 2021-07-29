@@ -8,6 +8,7 @@ import CoinDetails from '../pages/CoinDetails'
 import PortfolioDetails from '../pages/PortfolioDetails'
 import ChartDetails from '../pages/ChartDetails'
 import BuyBitcoin from '../pages/BuyBitcoin'
+import RankingScreen from '../screens/RankingScreen'
 
 const AppStack = () => {
 
@@ -56,6 +57,10 @@ const AppStack = () => {
                 options={{
                     title: "Buy Bitcoin"
                 }}
+            />
+            <Stack.Screen 
+                name="Completed Sales" 
+                component={RankingScreen}
             />
         </Stack.Navigator>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
 const PortfolioCurrency = ({ image, name, label, value, rate }) => {
@@ -11,6 +11,8 @@ const PortfolioCurrency = ({ image, name, label, value, rate }) => {
     }
 
     return (
+        <View>
+            {rate ? (
         <TouchableOpacity onPress={goTo}>
             <View style={{
                 display: "flex",
@@ -59,6 +61,10 @@ const PortfolioCurrency = ({ image, name, label, value, rate }) => {
                 </View>
             </View>
         </TouchableOpacity>
+        ) : (
+            <ActivityIndicator size="large" color="green" />
+        )}
+        </View>
     )
 }
 

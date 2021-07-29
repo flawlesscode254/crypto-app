@@ -20,6 +20,7 @@ const CoinDetails = () => {
   const [error, setError] = useState(null);
   const [balance, setBalance] = useState()
   const [reference, setReference] = useState()
+  const [price, setPrice] = useState()
 
   const navigation = useNavigation();
 
@@ -85,6 +86,7 @@ const CoinDetails = () => {
           "https://api.coindesk.com/v1/bpi/currentprice.json"
         );
         const json = await response.json();
+        await setPrice(json.bpi.USD.rate);
         await setVal(json.bpi.USD.rate_float);
       }, 1000);
     })()

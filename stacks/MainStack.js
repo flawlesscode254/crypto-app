@@ -36,8 +36,8 @@ const MainStack = () => {
                 case "Portfolio":
                     iconName = "pie-chart"
                     break;
-                case "Ranking":
-                    iconName = "bar-chart"
+                case "Sales":
+                    iconName = "cash"
                     break;
                 case "Profile":
                     iconName = "person-outline"
@@ -65,7 +65,7 @@ const MainStack = () => {
                 component={MarketScreen}
             />
             <Stack.Screen 
-                name="Ranking" 
+                name="Sales" 
                 component={RankingScreen} 
             />
             <Stack.Screen 

@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 import db, {auth} from '../firebase'
 import firebase from 'firebase'
+import { useNavigation } from '@react-navigation/core'
 
 const PorfolioState = ({ id, time, nature, buying_price, bitcoin_bought, money_spent }) => {
     const [current, setCurrent] = useState()
     const [reference, setReference] = useState()
     const [next, setNext] = useState();
     const [loading, setLoading] = useState(false)
+
+    const navigation = useNavigation()
 
     const a = Number(next)
     const b = Number(buying_price.replace(/\$|,/g, ""))
@@ -45,6 +48,7 @@ const PorfolioState = ({ id, time, nature, buying_price, bitcoin_bought, money_s
       await makeUpdate()
       await makeDelete()
       await setLoading(loading)
+      await navigation.navigate("Ranks")
     }
 
     useEffect(() => {
