@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 import db, {auth} from '../firebase'
 
 const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent }) => {
@@ -34,7 +34,8 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
         borderWidth: 1,
         padding: 10,
         borderRadius: 7,
-        marginBottom: 10
+        marginBottom: 10,
+        backgroundColor: "#d5dbd6"
       }}
     >
         <View style={{
@@ -116,7 +117,7 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
           <Text>{`$ ${money_spent}`}</Text>
         </View>
       </View>
-
+            {next ? (
         <View style={{
             flexDirection: "row",
             justifyContent: "space-between",
@@ -148,7 +149,9 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
                 }}>{`${(((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100).toFixed(2)} %`}</Text>
             </View>
         </View>
-
+        ) : (
+          <ActivityIndicator size="large" color="green" />
+        )}
     </View>
     )
 }

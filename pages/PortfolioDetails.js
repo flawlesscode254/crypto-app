@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator } from "react-native";
 import db, { auth } from "../firebase";
 
 import PorfolioState from "../components/PorfolioState";
@@ -17,6 +17,7 @@ const CoinDetails = () => {
   useEffect(() => {
     db.collection("buy")
       .where("email", "==", auth?.currentUser?.email)
+      .orderBy("time", "desc")
       .onSnapshot((snapshot) => {
         setData(
           snapshot.docs.map((doc) => ({
@@ -74,13 +75,14 @@ const CoinDetails = () => {
     <View
       style={{
         flex: 1,
+        backgroundColor: "#FFF"
       }}
     >
       <View
         style={{
           flexDirection: "row",
           marginVertical: 10,
-          marginHorizontal: 10,
+          marginHorizontal: 10
         }}
       >
         <Image
@@ -117,83 +119,87 @@ const CoinDetails = () => {
         </View>
       </View>
 
-      <View
-        style={{
-          marginHorizontal: 10,
-          marginVertical: 5,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginBottom: 20,
-          marginTop: 10,
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              fontSize: 12,
-              color: "black",
-            }}
-          >
-            Current
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              letterSpacing: 2,
-              color: "#009afa",
-            }}
-          >
-            {`$${current}`}
-          </Text>
-        </View>
-
+      {next ? (
         <View
           style={{
+            marginHorizontal: 10,
+            marginVertical: 5,
             flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 20,
+            marginTop: 10,
           }}
         >
-          <View
-            style={{
-              marginRight: 15,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 12,
-              }}
-            >
-              1 day
-            </Text>
-            <Text
-              style={{
-                fontWeight: "bold",
-                letterSpacing: 2,
-                color: change > 0 ? "green" : "red",
-              }}
-            >
-              {change > 0 ? `+${change}%` : `${change}%`}
-            </Text>
-          </View>
           <View>
             <Text
               style={{
                 fontSize: 12,
+                color: "black",
               }}
             >
-              1 month
+              Current
             </Text>
             <Text
               style={{
                 fontWeight: "bold",
                 letterSpacing: 2,
-                color: month > 0 ? "green" : "red",
+                color: "#009afa",
               }}
             >
-              {month > 0 ? `+${month}%` : `${month}%`}
+              {`$${current}`}
             </Text>
           </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <View
+              style={{
+                marginRight: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 12,
+                }}
+              >
+                1 day
+              </Text>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  letterSpacing: 2,
+                  color: change > 0 ? "green" : "red",
+                }}
+              >
+                {change > 0 ? `+${change}%` : `${change}%`}
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontSize: 12,
+                }}
+              >
+                1 month
+              </Text>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  letterSpacing: 2,
+                  color: month > 0 ? "green" : "red",
+                }}
+              >
+                {month > 0 ? `+${month}%` : `${month}%`}
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
+      ) : (
+        <ActivityIndicator size="large" color="green" />
+      )}
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
