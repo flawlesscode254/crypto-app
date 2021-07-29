@@ -6,6 +6,14 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
     const [current, setCurrent] = useState()
     const [next, setNext] = useState();
 
+    const a = Number(next)
+    const b = Number(buying_price.replace(/\$|,/g, ""))
+    const c = Number(money_spent)
+
+    const change = (((((((a - b) / b) * 100) + 100) / 100) * c) - c).toFixed(2)
+    const income = ((((((a - b) / b) * 100) + 100) / 100) * c).toFixed(2)
+    const percent = (((a - b) / b) * 100).toFixed(2)
+
     useEffect(() => {
         (() => {
           setInterval(async () => {
@@ -129,8 +137,8 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
                     color: "blue"
                 }}>Amount change</Text>
                 <Text style={{
-                    color: (((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)) - Number(money_spent)).toFixed(2) > 0 ? "green" : "red"
-                }}>{`$ ${(((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)) - Number(money_spent)).toFixed(2)}`}</Text>
+                    color: change > 0 ? "green" : "red"
+                }}>{`$ ${change}`}</Text>
             </View>
             <View>
                 <Text style={{
@@ -138,15 +146,15 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
                 }}>Total income</Text>
                 <Text style={{
                   color: "black"
-                }}>{`$ ${((((((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100) + 100) / 100) * Number(money_spent)).toFixed(2)}`}</Text>
+                }}>{`$ ${income}`}</Text>
             </View>
             <View>
                 <Text style={{
                     color: "blue"
                 }}>Percentage change</Text>
                 <Text style={{
-                    color: (((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100).toFixed(2) > 0 ? "green" : "red"
-                }}>{`${(((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) / Number(buying_price.replace(/\$|,/g, ""))) * 100).toFixed(2)} %`}</Text>
+                    color: percent > 0 ? "green" : "red"
+                }}>{`${percent} %`}</Text>
             </View>
         </View>
         ) : (
