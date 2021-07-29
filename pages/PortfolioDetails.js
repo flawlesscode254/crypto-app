@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
-import db, {auth} from '../firebase'
+import db, { auth } from "../firebase";
 
 import PorfolioState from "../components/PorfolioState";
 
@@ -12,20 +12,24 @@ const CoinDetails = () => {
   const [checkers, setCheckers] = useState([]);
   const [next, setNext] = useState();
   const [month, setMonth] = useState();
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    db.collection("buy").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
-      setData(snapshot.docs.map(doc => ({
-        id: doc.id,
-        time: doc.data().time,
-        nature: doc.data().nature,
-        buying_price: doc.data().buying_price,
-        bitcoin_bought: doc.data().bitcoin_bought,
-        money_spent: doc.data().money_spent
-      })))
-    })
-  }, [])
+    db.collection("buy")
+      .where("email", "==", auth?.currentUser?.email)
+      .onSnapshot((snapshot) => {
+        setData(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            time: doc.data().time,
+            nature: doc.data().nature,
+            buying_price: doc.data().buying_price,
+            bitcoin_bought: doc.data().bitcoin_bought,
+            money_spent: doc.data().money_spent,
+          }))
+        );
+      });
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -127,7 +131,7 @@ const CoinDetails = () => {
           <Text
             style={{
               fontSize: 12,
-              color: "black"
+              color: "black",
             }}
           >
             Current
@@ -190,20 +194,19 @@ const CoinDetails = () => {
           </View>
         </View>
       </View>
-        <FlatList 
-          inverted={true}
-          data={data}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <PorfolioState
-              time={item.time}
-              nature={item.nature}
-              bitcoin_bought={item.bitcoin_bought}
-              money_spent={item.money_spent}
-              buying_price={item.buying_price}
-            />
-          )}
-        />
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <PorfolioState
+            time={item.time}
+            nature={item.nature}
+            bitcoin_bought={item.bitcoin_bought}
+            money_spent={item.money_spent}
+            buying_price={item.buying_price}
+          />
+        )}
+      />
     </View>
   );
 };

@@ -126,16 +126,18 @@ const PorfolioState = ({ time, nature, buying_price, bitcoin_bought, money_spent
             <View>
                 <Text style={{
                     color: "blue"
-                }}>Initial amount</Text>
-                <Text>{`$ ${current}`}</Text>
-            </View>
-            <View>
-                <Text style={{
-                    color: "blue"
                 }}>Amount change</Text>
                 <Text style={{
                     color: (Number(next) - Number(buying_price.replace(/\$|,/g, ""))).toFixed(2) > 0 ? "green" : "red"
                 }}>{`$ ${(Number(next) - Number(buying_price.replace(/\$|,/g, ""))).toFixed(2)}`}</Text>
+            </View>
+            <View>
+                <Text style={{
+                    color: "blue"
+                }}>Total income</Text>
+                <Text style={{
+                  color: "black"
+                }}>{`$ ${((Number(next) - Number(buying_price.replace(/\$|,/g, ""))) + Number(money_spent)).toFixed(2)}`}</Text>
             </View>
             <View>
                 <Text style={{
