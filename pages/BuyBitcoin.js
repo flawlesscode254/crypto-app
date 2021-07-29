@@ -21,6 +21,7 @@ const CoinDetails = () => {
   const [balance, setBalance] = useState()
   const [reference, setReference] = useState()
   const [price, setPrice] = useState()
+  const [vary, setVary] = useState()
 
   const navigation = useNavigation();
 
@@ -28,6 +29,7 @@ const CoinDetails = () => {
     db.collection("users").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
         snapshot.docs.forEach(doc => {
             setBalance((doc.data().amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            setVary(doc.data().amount)
             setReference(doc.id)
         })
     })
@@ -35,7 +37,7 @@ const CoinDetails = () => {
 
   const makeUpdate = () => {
     db.collection("users").doc(reference).update({
-      amount: (Number(auth?.currentUser?.photoURL) - Number(amount))
+      amount: (Number(vary) - Number(amount))
     })
   };
 
@@ -53,7 +55,7 @@ const CoinDetails = () => {
 
   const makePurchase = async () => {
     await setLoading(!loading);
-    if (Number(amount) > Number(auth?.currentUser?.photoURL)) {
+    if (Number(amount) > Number(vary)) {
       await setLoading(loading);
       await setError(
         "You can't enter an amount that is greater than your balance"

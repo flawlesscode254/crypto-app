@@ -39,22 +39,10 @@ const ProfileScreen = () => {
                 color: "#eb7a34"
             }}>{auth?.currentUser?.email}</Text>
             <Text style={{
-                color: "red",
-                fontWeight: "bold"
-            }}>{`$ ${money}`}</Text>
-            <View style={{
-                flexDirection: "row",
+                color: "green",
+                fontWeight: "bold",
                 marginTop: 10
-            }}>
-                <Text style={{
-                    marginRight: 30,
-                    fontWeight: "bold"
-                }}>$ 150,000</Text>
-                <Text style={{
-                    color: "green",
-                    fontWeight: "bold"
-                }}>+ $ 50,000</Text>
-            </View>
+            }}>{`$ ${money}`}</Text>
             
             <View style={{
                 marginHorizontal: 100,
