@@ -29,7 +29,7 @@ const PortfolioScreen = () => {
   }, [bought]);
 
   useEffect(() => {
-    db.collection("buy").onSnapshot((snapshot) => {
+    db.collection("buy").where("email", "==", auth?.currentUser?.email).onSnapshot((snapshot) => {
       setBought(
         snapshot.docs.map((doc) => ({
           id: doc.id,
