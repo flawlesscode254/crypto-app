@@ -13,17 +13,19 @@ const AppStack = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Main"
+    >
       <Stack.Screen
-        name="Auth"
-        component={AuthStack}
+        name="Main"
+        component={MainStack}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Main"
-        component={MainStack}
+        name="Auth"
+        component={AuthStack}
         options={{
           headerShown: false,
         }}

@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
+import { auth } from "../firebase";
 
 import HomeScreen from "../screens/HomeScreen";
 import MarketScreen from "../screens/MarketScreen";
@@ -11,6 +13,15 @@ import RankingScreen from "../screens/RankingScreen";
 
 const MainStack = () => {
   const Stack = createBottomTabNavigator();
+  const navigation = useNavigation()
+
+  navigation.addListener("focus", () => {
+    auth.onAuthStateChanged((authUser) => {
+      if (!authUser) {
+        navigation.navigate("Auth");
+      }
+    });
+  })
 
   const tabBarOptions = {
     style: {

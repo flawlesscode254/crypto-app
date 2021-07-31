@@ -37,14 +37,6 @@ const SignInScreen = ({ navigation }) => {
     navigation.navigate("SignUp");
   };
 
-  useEffect(() => {
-      auth.onAuthStateChanged((authUser) => {
-        if (authUser) {
-          navigation.navigate("Main");
-        }
-      });
-  }, []);
-
   return (
     <KeyboardAvoidingView style={styles.container}>
       <StatusBar barStyle="light-content" />
