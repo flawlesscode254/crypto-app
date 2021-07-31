@@ -38,15 +38,12 @@ const SignInScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
       auth.onAuthStateChanged((authUser) => {
         if (authUser) {
           navigation.navigate("Main");
         }
       });
-    });
-    return unsubscribe;
-  }, [auth]);
+  }, []);
 
   return (
     <KeyboardAvoidingView style={styles.container}>
