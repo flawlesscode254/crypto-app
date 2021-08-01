@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   ActivityIndicator,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   StatusBar,
+  BackHandler
 } from "react-native";
 import { auth } from "../firebase";
 
@@ -32,6 +33,10 @@ const SignInScreen = ({ navigation }) => {
         setError(error.message);
       });
   };
+
+  const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+    BackHandler.exitApp();
+  });
 
   const SignUp = () => {
     navigation.navigate("SignUp");

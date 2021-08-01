@@ -27,7 +27,9 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
           color: "red",
         }}
       >
-        {id}
+        <Text style={{
+          color: "black"
+        }}>Tracking id: </Text>{id}
       </Text>
 
       <View
@@ -35,14 +37,33 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
+          width: "100%"
         }}
       >
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View>
+        <View style={{
+          marginRight: 20
+        }}>
+          <Text
+            style={{
+              color: "blue",
+            }}
+          >
+            Email address
+          </Text>
+          <Text
+            style={{
+              color: "black",
+              marginTop: 5,
+            }}
+          >
+            {auth?.currentUser?.email}
+          </Text>
+        </View>
+        <View style={{
+          marginRight: 20
+        }}>
           <Text
             style={{
               color: "blue",
@@ -57,12 +78,9 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
             }}
           >{`$ ${original}`}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View style={{
+          marginRight: 20
+        }}>
           <Text
             style={{
               color: "blue",
@@ -77,21 +95,9 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
             }}
           >{`$ ${final}`}</Text>
         </View>
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        </View>
+        <View>
+        <View>
           <Text
             style={{
               color: "blue",
@@ -106,12 +112,7 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
             }}
           >{`$ ${profit}`}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View>
           <Text
             style={{
               color: "blue",
@@ -126,12 +127,7 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
             }}
           >{`${bitcoin} BTC`}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View>
           <Text
             style={{
               color: "blue",
@@ -150,6 +146,7 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
           >
             {`${((Number(profit) / Number(original)) * 100).toFixed(2)}%`}
           </Text>
+        </View>
         </View>
       </View>
     </View>

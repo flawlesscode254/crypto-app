@@ -29,11 +29,21 @@ const MarketScreen = () => {
       style={{
         flex: 1,
         marginTop: 30,
-        justifyContent: data.length > 0 ? "flex-start" : "center",
-        alignItems: data.length > 0 ? "flex-start" : "center",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <StatusBar barStyle="dark-content" />
+      <View style={{
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+        <Text style={{
+          fontWeight: "bold",
+          fontSize: 15,
+          letterSpacing: 3
+        }}>Your successfull trades</Text>
+      </View>
       {data.length > 0 ? (
         <View
           style={{
