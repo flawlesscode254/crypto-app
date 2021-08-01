@@ -29,21 +29,19 @@ const PortfolioScreen = () => {
   }, [bought]);
 
   useEffect(() => {
-    db.collection("buy")
-      .where("email", "==", auth?.currentUser?.email)
-      .onSnapshot((snapshot) => {
-        setBought(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            bitcoin_bought: doc.data().bitcoin_bought,
-            money_spent: doc.data().money_spent,
-          }))
-        );
-      });
-  }, []);
-
-  useEffect(() => {
-    db.collection("users")
+    (async () => {
+      await db.collection("buy")
+        .where("email", "==", auth?.currentUser?.email)
+        .onSnapshot((snapshot) => {
+          setBought(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              bitcoin_bought: doc.data().bitcoin_bought,
+              money_spent: doc.data().money_spent,
+            }))
+          );
+        });
+      await db.collection("users")
       .where("email", "==", auth?.currentUser?.email)
       .onSnapshot((snapshot) => {
         snapshot.docs.forEach((doc) => {
@@ -55,6 +53,7 @@ const PortfolioScreen = () => {
           );
         });
       });
+    })()
   }, []);
 
   useEffect(() => {
