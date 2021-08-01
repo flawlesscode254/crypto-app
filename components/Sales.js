@@ -48,28 +48,6 @@ const Sales = ({ id, time, original, final, profit, bitcoin }) => {
               color: "blue",
             }}
           >
-            Email address
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              marginTop: 5,
-            }}
-          >
-            {auth?.currentUser?.email}
-          </Text>
-        </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              color: "blue",
-            }}
-          >
             Original amount
           </Text>
           <Text
