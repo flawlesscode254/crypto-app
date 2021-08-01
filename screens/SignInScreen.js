@@ -11,12 +11,15 @@ import {
   BackHandler
 } from "react-native";
 import { auth } from "../firebase";
+import { useRoute } from "@react-navigation/core";
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const route = useRoute()
 
   const handleLogin = async () => {
     await setLoading(!loading);
@@ -34,8 +37,10 @@ const SignInScreen = ({ navigation }) => {
       });
   };
 
-  const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
-    BackHandler.exitApp();
+  BackHandler.addEventListener("hardwareBackPress", () => {
+    if (route.name === "SignIn") {
+      BackHandler.exitApp();
+    }
   });
 
   const SignUp = () => {

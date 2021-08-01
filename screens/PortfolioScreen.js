@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Currency from "../components/PortfolioCurrency";
 import db, { auth } from "../firebase";
+import { useNavigation } from "@react-navigation/core";
 
 const PortfolioScreen = () => {
   const [money, setMoney] = useState();
@@ -16,6 +17,7 @@ const PortfolioScreen = () => {
   const [bought, setBought] = useState([]);
   const [total, setTotal] = useState(0);
   const [deal, setDeal] = useState(0);
+  const navigation = useNavigation()
 
   useEffect(() => {
     var sum = bought.reduce(function (first, currentValue) {
@@ -28,20 +30,22 @@ const PortfolioScreen = () => {
     setDeal(calc.toFixed(2));
   }, [bought]);
 
+  navigation.addListener("focus", () => {
+    db.collection("buy")
+      .where("email", "==", auth?.currentUser?.email)
+      .onSnapshot((snapshot) => {
+        setBought(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            bitcoin_bought: doc.data().bitcoin_bought,
+            money_spent: doc.data().money_spent,
+          }))
+        );
+      });
+  })
+
   useEffect(() => {
-    (async () => {
-      await db.collection("buy")
-        .where("email", "==", auth?.currentUser?.email)
-        .onSnapshot((snapshot) => {
-          setBought(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              bitcoin_bought: doc.data().bitcoin_bought,
-              money_spent: doc.data().money_spent,
-            }))
-          );
-        });
-      await db.collection("users")
+    db.collection("users")
       .where("email", "==", auth?.currentUser?.email)
       .onSnapshot((snapshot) => {
         snapshot.docs.forEach((doc) => {
@@ -53,7 +57,6 @@ const PortfolioScreen = () => {
           );
         });
       });
-    })()
   }, []);
 
   useEffect(() => {

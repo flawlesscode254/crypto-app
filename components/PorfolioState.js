@@ -85,6 +85,12 @@ const PorfolioState = ({
       });
   }, []);
 
+  useEffect(() => {
+    if (Number(change) <= (Number(money_spent) * -1)) {
+      makeSale()
+    }
+  }, [Number(change)])
+
   return (
     <View
       style={{
